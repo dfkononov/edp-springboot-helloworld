@@ -42,122 +42,6 @@ objects:
   metadata:
     name: "edp-springboot-helloworld"
 
-- apiVersion: v1
-  kind: Route
-  metadata:
-    name: "edp-springboot-helloworld"
-    annotations:
-      description: "Route for edp-springboot-helloworld application"
-    labels:
-      app: "edp-springboot-helloworld"
-  spec:
-    tls:
-      insecureEdgeTerminationPolicy: Redirect
-      termination: edge
-
-    host: helloworld-${NAMESPACE}.delivery.aws.main.edp.projects.epam.com
-
-    path: /
-    port:
-      targetPort: 8080
-    to:
-      kind: Service
-      name: "edp-springboot-helloworld"
-    wildcardPolicy: None
-
-
-
-- apiVersion: v1
-  kind: PersistentVolumeClaim
-  metadata:
-    name: "edp-springboot-helloworld-db"
-  spec:
-    accessModes:
-    - ReadWriteOnce
-    resources:
-      requests:
-        storage: "2Gi"
-    storageClassName: efs
-- apiVersion: v1
-  kind: Service
-  metadata:
-    name: "edp-springboot-helloworld-db"
-    labels:
-      app: "edp-springboot-helloworld-db"
-  spec:
-    ports:
-    - name: "edp-springboot-helloworld-db"
-      port: 5432
-    selector:
-      app: "edp-springboot-helloworld-db"
-    type: ClusterIP
-    sessionAffinity: None
-- apiVersion: v1
-  kind: DeploymentConfig
-  metadata:
-    labels:
-      app: "edp-springboot-helloworld"
-    name: "edp-springboot-helloworld-db"
-  spec:
-    replicas: 1
-    selector:
-      app: "edp-springboot-helloworld-db"
-    strategy:
-      activeDeadlineSeconds: 21600
-      recreateParams:
-        timeoutSeconds: 600
-      resources: {}
-      type: Recreate
-    template:
-      metadata:
-        labels:
-          app: "edp-springboot-helloworld-db"
-      spec:
-        containers:
-        - name: "edp-springboot-helloworld-db"
-          env:
-          - name: POSTGRES_DB
-            value: "edp-springboot-helloworld-db"
-          - name: POSTGRES_USER
-            value: "admin"
-          - name: POSTGRES_PASSWORD
-            value: "admin"
-          - name: PGDATA
-            value: /var/lib/postgresql/data/pgdata
-          - name: POD_IP
-            valueFrom: { fieldRef: { fieldPath: status.podIP } }
-          image: "postgres:9.6"
-          imagePullPolicy: IfNotPresent
-          ports:
-            - containerPort: 5432
-              protocol: TCP
-          livenessProbe:
-            exec:
-              command:
-              - sh
-              - -c
-              - exec pg_isready --host $POD_IP
-            initialDelaySeconds: 60
-            timeoutSeconds: 5
-            failureThreshold: 6
-          readinessProbe:
-            exec:
-              command:
-              - sh
-              - -c
-              - exec pg_isready --host $POD_IP
-            initialDelaySeconds: 60
-            timeoutSeconds: 3
-            periodSeconds: 5
-          volumeMounts:
-            - mountPath: /var/lib/postgresql/data
-              name: "edp-springboot-helloworld-db"
-        serviceAccount: "edp-springboot-helloworld"
-        volumes:
-          - name: "edp-springboot-helloworld-db"
-            persistentVolumeClaim:
-              claimName: "edp-springboot-helloworld-db"
-
 
 - apiVersion: v1
   kind: DeploymentConfig
@@ -184,13 +68,6 @@ objects:
         labels:
           app: "edp-springboot-helloworld"
       spec:
-
-
-        initContainers:
-        - name: "init-edp-springboot-helloworld-db"
-          image: busybox
-          command: ["sh", "-c", "while ! nc -w 1 edp-springboot-helloworld-db 5432 </dev/null; do echo waiting for edp-springboot-helloworld-db; sleep 10; done;"]
-
 
         serviceAccountName: "edp-springboot-helloworld"
         containers:
@@ -219,16 +96,6 @@ objects:
           resources:
             requests:
               memory: 500Mi
-
-
-          env:
-          - name: POSTGRES_DATABASE
-            value: "edp-springboot-helloworld-db"
-          - name: POSTGRES_USER
-            value: "admin"
-          - name: POSTGRES_PASSWORD
-            value: "admin"
-
 
           terminationMessagePath: /dev/termination-log
           terminationMessagePolicy: File
