@@ -9,7 +9,9 @@ database:
 
 
 ingress:
-  required: false
+  required: true
+  site: ee
+  path: /
 
 image:
   name: edp-springboot-helloworld
