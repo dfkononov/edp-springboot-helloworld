@@ -9,9 +9,7 @@ database:
 
 
 ingress:
-  required: true
-  site: test
-  path: /
+  required: false
 
 image:
   name: edp-springboot-helloworld
