@@ -1,4 +1,4 @@
-name: sssssssss
+name: edp-springboot-helloworld1
 namespace: ""
 cdPipelineName: ""
 cdPipelineStageName: ""
@@ -12,5 +12,5 @@ ingress:
   required: false
 
 image:
-  name: sssssssss
+  name: edp-springboot-helloworld1
   version: latest

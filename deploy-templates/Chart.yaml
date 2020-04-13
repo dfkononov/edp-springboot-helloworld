@@ -1,6 +1,6 @@
 apiVersion: v1
 description: Helm chart for Java application/service deploying
-name: sssssssss
+name: edp-springboot-helloworld1
 version: 1.0
 keywords:
     - Java
