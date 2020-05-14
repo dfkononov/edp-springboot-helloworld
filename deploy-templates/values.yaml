@@ -15,7 +15,7 @@ database:
 
 ingress:
   required: true
-  site: test
+  site: app
   path: /
 
 image:
