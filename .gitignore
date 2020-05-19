@@ -21,7 +21,7 @@ nbproject/private/
 build/
 nbbuild/ 
 dist/
-nbdist/
+nbdist/    
 .nb-gradle/
 /demo.iml
 /mvnw.cmd
