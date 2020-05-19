@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.epam.edp</groupId>
-	<artifactId>java-maven-springboot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>java-maven-springboot</artifactId>
 	<packaging>jar</packaging>
 
 	<description>Demo project for Spring Boot</description>
