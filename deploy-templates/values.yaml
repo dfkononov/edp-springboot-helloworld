@@ -1,4 +1,4 @@
-name: dk-java
+name: edp-springboot-helloworld
 namespace: ""
 cdPipelineName: ""
 cdPipelineStageName: ""
@@ -12,5 +12,5 @@ ingress:
   required: false
 
 image:
-  name: dk-java
+  name: edp-springboot-helloworld
   version: latest
