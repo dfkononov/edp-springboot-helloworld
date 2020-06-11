@@ -1,4 +1,4 @@
-name: dk-java8
+name: dk-java
 namespace: ""
 cdPipelineName: ""
 cdPipelineStageName: ""
@@ -12,5 +12,5 @@ ingress:
   required: false
 
 image:
-  name: dk-java8
+  name: dk-java
   version: latest
