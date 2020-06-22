@@ -4,8 +4,13 @@ cdPipelineName: ""
 cdPipelineStageName: ""
 dnsWildcard: eks-delivery.aws.main.edp.projects.epam.com
 
+
 database:
-  required: false
+  required: true
+  version: postgres:9.6
+  storageClass: gp2
+  capacity: 1Gi
+
 
 
 ingress:
