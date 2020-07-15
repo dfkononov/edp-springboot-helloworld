@@ -2,16 +2,14 @@ name: edp-springboot-helloworld
 namespace: ""
 cdPipelineName: ""
 cdPipelineStageName: ""
-dnsWildcard: eks-demo.aws.main.edp.projects.epam.com
+dnsWildcard: eks-delivery.aws.main.edp.projects.epam.com
 
 database:
   required: false
 
 
 ingress:
-  required: true
-  site: test
-  path: /
+  required: false
 
 image:
   name: edp-springboot-helloworld
