@@ -42,29 +42,6 @@ objects:
   metadata:
     name: "edp-springboot-helloworld"
 
-- apiVersion: v1
-  kind: Route
-  metadata:
-    name: "edp-springboot-helloworld"
-    annotations:
-      description: "Route for edp-springboot-helloworld application"
-    labels:
-      app: "edp-springboot-helloworld"
-  spec:
-    tls:
-      insecureEdgeTerminationPolicy: Redirect
-      termination: edge
-
-    host: test-${NAMESPACE}.delivery.aws.main.edp.projects.epam.com
-
-    path: /
-    port:
-      targetPort: 8080
-    to:
-      kind: Service
-      name: "edp-springboot-helloworld"
-    wildcardPolicy: None
-
 
 - apiVersion: v1
   kind: DeploymentConfig
